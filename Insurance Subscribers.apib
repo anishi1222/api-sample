@@ -1,0 +1,148 @@
+FORMAT: 1A
+HOST: https://gw-api.jp.oraclecloud.com
+
+# 加入者情報
+
+加入者の追加・取得・変更・削除のためのAPIです。
+利用にあたっては、API Keyが必要です。
+
+## 加入者情報の検索・作成 [/insurance/subscriber{?sid,f,l,d}]
+
+### 検索・取得 [GET]
+
+加入者情報をクエリ文字列を使って検索し取得します。
+
++ Parameters
+
+    + sid: `123456` (required, string) - お客様番号
+    + f: `花子` (string) - 名
+    + l: `山田` (string) - 姓
+    + d: `1989-01-07T00:00:00Z` (string) - お客様の生年月日
+
++ Response 200 (application/json)
+
+    + Headers
+
+            api-key : 6d1a4960-29a4-43d2-9ae5-670ed0b0b57f
+
+    + Attributes
+    
+        + subscribers : (array[Subscriber]) - 加入者情報
+
++ Response 404 (application/json)
+
+    + Attributes(ErrorInfo)
+
+### 新規作成・追加 [POST]
+
+加入者情報を作成・追加します。
+
++ Request (application/json)
+
+    + Headers
+
+            api-key : 6d1a4960-29a4-43d2-9ae5-670ed0b0b57f
+
+    + Attributes(BaseInfo)
+    
++ Response 201 (application/json)
+
+    + Attributes(Subscriber)
+
++ Response 403 (application/json)
+
+    + Attributes(ErrorInfo)
+
+## 加入者情報の取得・変更・削除 [/insurance/subscriber/{sid}]
+
+### 取得 [GET]
+
+お客様番号を使って、情報を取得します。
+
++ Parameters
+
+    + sid: 123456 (required, string) - お客様番号
+
++ Response 200 (application/json)
+
+    + Headers
+
+            api-key : 6d1a4960-29a4-43d2-9ae5-670ed0b0b57f
+
+    + Attributes(Subscriber)
+
++ Response 404 (application/json)
+
+    + Attributes(ErrorInfo)
+
+### 変更 [PUT]
+
+加入者情報を変更します。
+
++ Parameters
+
+    + sid: 123456 (required, string) - お客様番号
+
++ Request (application/json)
+
+    + Headers
+
+            api-key : 6d1a4960-29a4-43d2-9ae5-670ed0b0b57f
+
+    + Attributes(BaseInfo)
+
++ Response 200 (application/json)
+
+    + Attributes(Subscriber)
+
++ Response 404 (application/json)
+
+    + Attributes(ErrorInfo)
+
+### 削除 [DELETE]
+
+加入者情報を削除します（物理削除ではありません）。
+
++ Parameters
+
+    + sid: 123456 (required, string) - お客様番号
+
++ Request (application/json)
+
+    + Headers
+
+            api-key : 6d1a4960-29a4-43d2-9ae5-670ed0b0b57f
+
++ Response 200 (application/json)
+
+    + Attributes(Subscriber4Delete)
+
++ Response 404 (application/json)
+
+    + Attributes(ErrorInfo)
+
+## Data Structures
+
+### BaseInfo
++ first_name : 花子 (string) - 名
++ last_name : 山田 (string) - 姓
++ address1 : 東京都港区北青山2―5―8 (string) - 住所1
++ address2 : オラクル青山センター  (string) - 住所2
++ dateofbirth : `1989-01-07T00:00:00Z` (string) - お客様の生年月日
+
+### Subscriber
++ sid : 123456 (string) - お客様番号
++ base_info : (required, BaseInfo) - お客様基本情報
++ active : true (boolean) - アクティブ・非アクティブ
++ created_at : `2015-08-27T21:33:20Z` (string)  - 作成日時
++ updated_at : `2015-08-27T21:33:20Z` (string)  - 最終更新日時
+
+### Subscriber4Delete
++ sid : 123456 (string) - お客様番号
++ base_info : (required, BaseInfo) - お客様基本情報
++ active : false (boolean) - アクティブ・非アクティブ
++ created_at : `2015-08-27T21:33:20Z` (string)  - 作成日時
++ updated_at : `2015-08-27T21:33:20Z` (string)  - 最終更新日時
+
+### ErrorInfo
++ message : ○●に問題があります (string) - エラーメッセージ
