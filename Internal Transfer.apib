@@ -1,0 +1,76 @@
+FORMAT: 1A
+HOST: http://apics.oracle.com:8001
+
+# 送金API
+
+送金およびと送金取引の確認のためのAPIです。
+
+## 取引 [/transfer]
+
+### 取引の確認 [GET]
+
+送金者のIDを使って、送金の状況を確認します。
+
++ Request (application/json)
+
+    + Attributes(ConfirmationStatusByUser)
+
++ Response 200 (application/json)
+
+    + Attributes
+    
+        + transfer_history: (array[TransferInfo]) - 送金取引履歴
+
+### 送金の実行 [POST]
+
+メールアドレスで送金先を指定することができます。
+
++ Request (application/json)
+
+    + Attributes(TransferRequest)
+
++ Response 201 (application/json)
+
+    + Attributes(TransferInfo)
+
+## 個別取引 [/transfer/{tx_id}]
+
+### 取引の確認 [GET]
+
+送金取引トランザクションIDを使って、送金の状況を確認します。
+
++ Parameters
+
+    + tx_id: 123456 (required, string) - 送金取引トランザクションID
+
++ Response 200 (application/json)
+
+    + Attributes(TransferInfo)
+
+## Data Structures
+
+### ConfirmationStatusByUser
++ sender : taro.tanaka@example.local (string) - 送信元(メールアドレス）
+
+### TransferInfo
++ sender : taro.tanaka@example.local (string) - 送信元(メールアドレス）
++ receiver : hanako.yamada@example.local (string) - 送金先(メールアドレス）
++ amount : 123456 (number) - 送金する金額
++ currency : JPY (string) - 通貨単位
++ external_id : a123x23 (string) - 送信者が指定する一意のID
++ subject : Thanks! (string) - 送金者からのメモ
++ state : pending_receiver (enum[string]) - 取引の状況
+    + success  (string) - 送金成功
+    + pending_receiver  (string) - 送金先による集金が必要
+    + expired Transfer  (string) - 期限切れにより返金
++ created_at : `2015-08-27T21:33:20Z` (string) - 作成日時
++ updated_at : `2015-08-27T21:33:20Z` (string) - 最終更新日時
++ tx_id : 940879 (string) - 送金取引トランザクションID
+
+### TransferRequest
++ sender : taro.tanaka@example.local (required, string) - 送金元(メールアドレス）
++ receiver : hanako.yamada@example.local (required, string) - 送金先(メールアドレス）
++ amount : 123456 (required, number) - 送金する金額
++ currency : JPY (required, string) - 通貨単位
++ external_id : a123x23 (required, string) - 送信者が指定する一意のID
++ subject : Thanks! (optional, string) - 送金者からのメモ
