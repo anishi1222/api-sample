@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://apics.oracle.com:7201/
 
 # ホテル検索・予約
 
@@ -26,7 +26,6 @@ HOST: http://polls.apiblueprint.org/
     + out : `2017-02-13` (string) - チェックアウト日
     + adult : 2 (number) - 大人の人数
     + child : 2 (number) - 子供の人数
-    + roomCnt : 1 (number) - 部屋数
     + min : 10000 (number) - 金額の下限
     + max : 50000 (number) - 金額の上限
 
@@ -44,6 +43,34 @@ HOST: http://polls.apiblueprint.org/
 
     + Attributes(TError)
 
+## ホテルの予約 [/hotels]
+
+### ホテル予約API [POST]
+
+ホテルの部屋を予約します。
+ホテルID、部屋の種類、人数、チェックイン、チェックアウト日が必須です。
+予約が完了すると、レスポンスとして予約IDが戻ります。
+
++ Request (application/json)
+
+    + Headers
+
+            api-key : 6d1a4960-29a4-43d2-9ae5-670ed0b0b57f
+
+    + Attributes(TBookRequest)
+
++ Response 201 (application/json)
+
+    + Attributes(TBookResponse)
+
++ Response 403 (application/json)
+
+    + Attributes(TError)
+
++ Response 404 (application/json)
+
+    + Attributes(TError)
+
 ## Data Structures
 
 ### TResult
@@ -52,7 +79,7 @@ HOST: http://polls.apiblueprint.org/
 + contents: (array[THotel]) - 検索結果
 
 ### THotel
-+ id: H0001 (string) - ホテルID
++ hotelId: H0001 (string) - ホテルID
 + name: オラクルホテル青山 (string) - ホテル名称
 + url: `http://www.oracle.com/jp` (string) - ホテルのURL
 + address: 東京都港区青山2-5-8 (string) - ホテルの所在地
@@ -62,14 +89,26 @@ HOST: http://polls.apiblueprint.org/
 + rooms: (array[TRoom]) - 利用可能な部屋
 
 ### TRoom
-+ id: F001 (string) - ルームID
++ roomId: F001 (string) - ルームID
 + name: ファミリー (string) - 部屋名、仕様名
 + smokable : false (boolean) - 喫煙可、不可
 + charge: 12000 (number) - 宿泊代金
 + unit:  JPY (string) - 通貨単位
 + info: ツインベッド、40m2のお部屋です。 (string) - 部屋を説明する情報
-+ inventory:30 (number) - 空き部屋数
 
 ### TError
 + code: E001 (string) - エラーコード
 + info: 空室がありません (string) - エラーの詳細
+
+### TBookRequest
++ hotelId: H0001 (string) - ホテルID
++ inDateTime: `2015-08-27T21:33:20Z` (string) - チェックイン日時
++ outDatetime: `2015-08-27T21:33:20Z` (string) - チェックアウト日時
++ roomId: F001 (string) - ルームID
++ NumOfAdult: 2 (number) - 大人の宿泊人数
++ NumOChild: 2 (number) - 子供の宿泊人数
++ tx_id 94879 (string) - 取引トランザクションID
+
+### TBookResponse
++ bookingId: H0001 (string) - ホテルID
++ tx_id 94879 (string) - 取引トランザクションID
