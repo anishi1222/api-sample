@@ -7,9 +7,9 @@ HOST: http://apics.oracle.com:7201/
 
 利用にあたっては、API Keyが必要です。
 
-## ホテルの検索 [/hotels{?country,pref,city,detail,name,in,out,adult,child,roomCnt,min,max}]
+## ホテルを探す [/hotels{?country,pref,city,detail,name,in,out,adult,child,roomCnt,min,max}]
 
-### ホテル検索API [GET]
+### Search [GET]
 
 地域、都道府県などで検索します。
 国コード、都道府県コード、市区町村コードは必須です。
@@ -43,9 +43,9 @@ HOST: http://apics.oracle.com:7201/
 
     + Attributes(TError)
 
-## ホテルの予約 [/hotels]
+## 宿泊を予約する [/hotels]
 
-### ホテル予約API [POST]
+### Booking [POST]
 
 ホテルの部屋を予約します。
 ホテルID、部屋の種類、人数、チェックイン、チェックアウト日が必須です。
@@ -65,11 +65,17 @@ HOST: http://apics.oracle.com:7201/
 
 + Response 403 (application/json)
 
-    + Attributes(TError)
+    + Attributes
+    
+        + code: E002 (string) - エラーコード
+        + info: ○●の理由で予約できませんでした (string) - エラーの詳細
 
 + Response 404 (application/json)
 
-    + Attributes(TError)
+    + Attributes
+    
+        + code: E001 (string) - エラーコード
+        + info: 予約可能な部屋がありません (string) - エラーの詳細
 
 ## Data Structures
 
@@ -98,7 +104,7 @@ HOST: http://apics.oracle.com:7201/
 
 ### TError
 + code: E001 (string) - エラーコード
-+ info: 空室がありません (string) - エラーの詳細
++ info: エラーメッセージ (string) - エラーの詳細
 
 ### TBookRequest
 + hotelId: H0001 (string) - ホテルID
