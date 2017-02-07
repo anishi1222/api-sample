@@ -37,7 +37,7 @@ HOST: http://apics.oracle.com:7201/
 
 + Response 200 (application/json)
 
-    + Attributes(TResult)
+    + Attributes(TSearchResult)
 
 + Response 404 (application/json)
 
@@ -79,10 +79,8 @@ HOST: http://apics.oracle.com:7201/
 
 ## Data Structures
 
-### TResult
-+ totalPage: 10 (number) - 検索結果の全ページ数
-+ currentPage: 1 (number) - 現在のページ
-+ contents: (array[THotel]) - 検索結果
+### TSearchResult
++ result: (array[THotel]) - 検索結果
 
 ### THotel
 + hotelId: `H0001` (string) - ホテルID
