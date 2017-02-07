@@ -7,7 +7,7 @@ HOST: http://apics.oracle.com:7201/
 
 利用にあたっては、API Keyが必要です。
 
-## ホテルを探す [/hotels{?country,pref,city,detail,name,in,out,adult,child,roomCnt,min,max}]
+## ホテルを探す [/hotels/search{?country,pref,city,detail,name,in,out,adult,child,roomCnt,min,max}]
 
 ### Search [GET]
 
@@ -43,7 +43,7 @@ HOST: http://apics.oracle.com:7201/
 
     + Attributes(TError)
 
-## 宿泊を予約する [/hotels]
+## 宿泊を予約する [/hotels/book]
 
 ### Booking [POST]
 
@@ -85,36 +85,50 @@ HOST: http://apics.oracle.com:7201/
 + contents: (array[THotel]) - 検索結果
 
 ### THotel
-+ hotelId: H0001 (string) - ホテルID
-+ name: オラクルホテル青山 (string) - ホテル名称
++ hotelId: `H0001` (string) - ホテルID
++ name: `オラクルホテル青山` (string) - ホテル名称
 + url: `http://www.oracle.com/jp` (string) - ホテルのURL
-+ address: 東京都港区青山2-5-8 (string) - ホテルの所在地
-+ comment: 新しい、清潔なホテルです。 (string) - ホテルのアピールコメント
++ address: `東京都港区青山2-5-8` (string) - ホテルの所在地
++ comment: `新しい、清潔なホテルです。` (string) - ホテルのアピールコメント
 + in: `15:00` (string) - チェックイン開始時刻
 + out: `12:00` (string) - チェックアウト時刻
 + rooms: (array[TRoom]) - 利用可能な部屋
 
 ### TRoom
-+ roomId: F001 (string) - ルームID
-+ name: ファミリー (string) - 部屋名、仕様名
++ roomId: `F001` (string) - ルームID
++ name: `ファミリー` (string) - 部屋名、仕様名
 + smokable : false (boolean) - 喫煙可、不可
 + charge: 12000 (number) - 宿泊代金
-+ unit:  JPY (string) - 通貨単位
-+ info: ツインベッド、40m2のお部屋です。 (string) - 部屋を説明する情報
++ unit:  `JPY` (string) - 通貨単位
++ info: `ツインベッド、40m2のお部屋です。` (string) - 部屋を説明する情報
 
 ### TError
-+ code: E001 (string) - エラーコード
-+ info: エラーメッセージ (string) - エラーの詳細
++ code: `E001` (string) - エラーコード
++ info: `エラーメッセージ` (string) - エラーの詳細
 
 ### TBookRequest
-+ hotelId: H0001 (string) - ホテルID
-+ inDateTime: `2015-08-27T21:33:20Z` (string) - チェックイン日時
-+ outDatetime: `2015-08-27T21:33:20Z` (string) - チェックアウト日時
-+ roomId: F001 (string) - ルームID
-+ NumOfAdult: 2 (number) - 大人の宿泊人数
-+ NumOChild: 2 (number) - 子供の宿泊人数
-+ tx_id 94879 (string) - 取引トランザクションID
++ hotelId: `H0001` (string, required) - ホテルID
++ inDateTime: `2015-08-27T21:33:20Z` (string, required) - チェックイン日時
++ outDatetime: `2015-08-27T21:33:20Z` (string, required) - チェックアウト日時
++ roomId: `F001` (string, required) - ルームID
++ NumOfAdult: 1 (number) - 大人の宿泊人数
++ NumOChild: 0 (number) - 子供の宿泊人数
++ guestInfo: (TGuest) - 宿泊者の情報
++ tx_id: `94879` (string) - 取引トランザクションID
+
+### TGuest
++ lastName: `青山` (string) - 姓
++ firstName: `太郎` (string) - 名
++ countryId: `81` (string) - 国番号
++ phone: `8012345678` (string) - 電話番号
++ mail: `taro.aoyama@oracle.com` (string) 確認用メールアドレス
++ creditCard: (TCreditCard) - クレジットカード情報
+
+### TCreditCard
++ cardNum: `123456789012` (string) - クレジットカード番号
++ cardHolder: `TARO AOYAMA` (string) - クレジットカード所有者
++ securityCode: `94879` (string) - セキュリティコード
 
 ### TBookResponse
-+ bookingId: H0001 (string) - ホテルID
-+ tx_id 94879 (string) - 取引トランザクションID
++ bookingId: `B0001` (string) - 予約ID
++ tx_id: `94879` (string) - 取引トランザクションID（折り返し）
