@@ -196,4 +196,4 @@ definitions:
         description: "エラーメッセージ"
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
-basePath: /anishi1222/InsuranceProduct/1.0.0
+basePath: /InsuranceProduct/1.0.0
