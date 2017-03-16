@@ -1,6 +1,6 @@
 # api-sample
 Samples for API Platform, including backend services.
-- [Energy Consumption](Energy\ Consumption)
+- [Energy Consumption](EnergyConsumption)
 - [Insurance APIs](InsuranceAPIs)
 - [Internal Transfer](InternalTransfer)
 - [Japan Airport Info](JapanAirportInfo)
