@@ -156,44 +156,57 @@ definitions:
       pid:
         type: "string"
         description: "商品ID"
+        example: "AUTO-201"
       base_info:
         $ref: "#/definitions/BaseInfo"
       active:
         type: "boolean"
         description: "アクティブ・非アクティブ"
+        example: true
       created_at:
         type: "string"
         description: "作成日時"
+        example: "2010-04-01T00:00:00Z"
       updated_at:
         type: "string"
         description: "最終更新日時"
+        example: "2010-03-31T23:59:59Z"
       retired_at:
         type: "string"
         description: "廃止日時"
+        example: "2010-03-31T23:59:59Z"
   BaseInfo:
     type: "object"
     properties:
       category:
         type: "string"
         description: "商品カテゴリ"
+        example: "AUTO"
       product_name:
         type: "string"
         description: "保険商品の基本情報"
+        example: "○●総合自動車保険"
       overview:
         type: "string"
         description: "商品の概要"
+        example: "自家用車むけの総合保険です。"
       url:
         type: "string"
         description: "商品情報を掲載しているURL"
+        example: "http://xxx.yyy.zz/AUTO"
   ErrorInfo:
     type: "object"
     properties:
       code:
         type: "string"
         description: "エラーコード"
+        example: "API-1000"
       message:
         type: "string"
         description: "エラーメッセージ"
+        example: "パラメータ不足です"
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
-basePath: /InsuranceProduct/1.0.0
+# basePath: /InsuranceProduct/1.0.0
+# Added by API Auto Mocking Plugin
+basePath: /anishi1222/InsuranceProduct/1.0.0
