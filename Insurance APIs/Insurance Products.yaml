@@ -4,8 +4,8 @@ info:
   description: "保険商品情報の登録、照会、更新、削除のためのAPIです。"
   version: "1.0.0"
   title: "保険商品情報(Open API Specifications 2.0)"
-# host: "api.jp.oraclecloud.com"
-# basePath: "/insurance"
+host: "api.jp.oraclecloud.com"
+basePath: "/insurance"
 schemes:
 - "https"
 produces:
@@ -205,8 +205,3 @@ definitions:
         type: "string"
         description: "エラーメッセージ"
         example: "パラメータ不足です"
-# Added by API Auto Mocking Plugin
-host: virtserver.swaggerhub.com
-# basePath: /InsuranceProduct/1.0.0
-# Added by API Auto Mocking Plugin
-basePath: /anishi1222/InsuranceProduct/1.0.0
