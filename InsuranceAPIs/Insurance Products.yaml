@@ -4,8 +4,8 @@ info:
   description: "保険商品情報の登録、照会、更新、削除のためのAPIです。"
   version: "1.0.0"
   title: "保険商品情報(Open API Specifications 2.0)"
-# host: "api.jp.oraclecloud.com"
-# basePath: "/insurance"
+host: "api.jp.oraclecloud.com"
+basePath: "/insurance"
 schemes:
 - "https"
 produces:
@@ -14,8 +14,8 @@ paths:
   /product:
     get:
       tags:
-      - "Products"
-      summary: "保険商品情報の取得"
+      - "保険商品情報"
+      summary: "検索・取得"
       description: "保険商品をカテゴリ、名前で検索します。"
       operationId: "productsGET"
       parameters:
@@ -50,11 +50,10 @@ paths:
           description: "エラー（該当商品がない）"
           schema:
             $ref: "#/definitions/ErrorInfo"
-      x-swagger-router-controller: "Product"
     post:
       tags:
-      - "Products"
-      summary: "保険商品情報の追加"
+      - "保険商品情報"
+      summary: "追加"
       description: "保険商品を追加します。"
       operationId: "productsPOST"
       parameters:
@@ -78,12 +77,11 @@ paths:
           description: "エラー（商品追加に失敗）"
           schema:
             $ref: "#/definitions/ErrorInfo"
-      x-swagger-router-controller: "Product"
   /product/{pid}:
     put:
       tags:
-      - "Products"
-      summary: "保険商品情報の変更"
+      - "保険商品情報の変更・削除"
+      summary: "変更"
       description: "保険商品を変更します。"
       operationId: "productsPUT"
       parameters:
@@ -112,11 +110,10 @@ paths:
           description: "エラー（該当する商品がない）"
           schema:
             $ref: "#/definitions/ErrorInfo"
-      x-swagger-router-controller: "Product"
     delete:
       tags:
       - "Products"
-      summary: "保険商品情報の削除"
+      summary: "削除"
       description: |
         売り止めの保険商品を廃止します。
         
@@ -148,7 +145,6 @@ paths:
           description: "エラー（該当する商品がない）"
           schema:
             $ref: "#/definitions/ErrorInfo"
-      x-swagger-router-controller: "Product"
 definitions:
   Product:
     type: "object"
@@ -156,44 +152,52 @@ definitions:
       pid:
         type: "string"
         description: "商品ID"
+        example: "AUTO-201"
       base_info:
         $ref: "#/definitions/BaseInfo"
       active:
         type: "boolean"
         description: "アクティブ・非アクティブ"
+        example: true
       created_at:
         type: "string"
         description: "作成日時"
+        example: "2010-04-01T00:00:00Z"
       updated_at:
         type: "string"
         description: "最終更新日時"
+        example: "2010-03-31T23:59:59Z"
       retired_at:
         type: "string"
         description: "廃止日時"
+        example: "2010-03-31T23:59:59Z"
   BaseInfo:
     type: "object"
     properties:
       category:
         type: "string"
         description: "商品カテゴリ"
+        example: "AUTO"
       product_name:
         type: "string"
         description: "保険商品の基本情報"
+        example: "○●総合自動車保険"
       overview:
         type: "string"
         description: "商品の概要"
+        example: "自家用車むけの総合保険です。"
       url:
         type: "string"
         description: "商品情報を掲載しているURL"
+        example: "http://xxx.yyy.zz/AUTO"
   ErrorInfo:
     type: "object"
     properties:
       code:
         type: "string"
         description: "エラーコード"
+        example: "API-1000"
       message:
         type: "string"
         description: "エラーメッセージ"
-# Added by API Auto Mocking Plugin
-host: virtserver.swaggerhub.com
-basePath: /InsuranceProduct/1.0.0
+        example: "パラメータ不足です"
