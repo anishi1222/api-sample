@@ -1,0 +1,42 @@
+FORMAT: 1A
+HOST: http://foo.bar.com:8080/
+
+# 空港情報（国内）
+
+IATAコードを使って空港情報を検索します。
+コード指定しない場合、国内の空港情報を全件取得できます。
+
+## 国内の空港情報を取得する [/airports]
+
+### 全件取得 [GET]
+
+日本国内の空港情報を全件取得します。
+
++ Response 200 (application/json)
+
+    + Attributes(Tairports)
+
+## IATAコードで検索する [/airports/{iataCode}]
+
+### 検索 [GET]
+
+IATAコードを使って国内の空港情報を取得します。
+IATAコードを使わずに呼び出すと、日本国内の空港情報を全件取得できます。
+
++ Parameters
+
+    + iataCode : `HND` (string) - IATA空港コード
+
++ Response 200 (application/json)
+
+    + Attributes(Tairports)
+
+## Data Structures
+
+### Tairports
++ airport: (array[Tairport]) - 検索結果
+
+### Tairport
++ iataCode: `HND` (string) - IATAコード
++ Japanese: `東京(羽田)` (string) - 空港名称（日本語）
++ English: `Tokyo (Haneda)` (string) - 空港名称（英語）
