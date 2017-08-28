@@ -21,130 +21,130 @@ IATAコードを使って空港情報を検索します。
             {
                 "airport": [
                     {
-                        "iataCode": "CTS",
+                        "code": "CTS",
                         "name": {
-                            "japanese": "札幌(千歳)",
-                            "english": "Sapporo (Chitose)"
+                            "ja": "札幌(千歳)",
+                            "en": "Sapporo (Chitose)"
                         }
                     },
                     {
-                        "iataCode": "SDJ",
+                        "code": "SDJ",
                         "name": {
-                            "japanese": "仙台",
-                            "english": "Sendai"
+                            "ja": "仙台",
+                            "en": "Sendai"
                         }
                     },
                     {
-                        "iataCode": "HND",
+                        "code": "HND",
                         "name": {
-                            "japanese": "東京(羽田)",
-                            "english": "Tokyo (Haneda)"
+                            "ja": "東京(羽田)",
+                            "en": "Tokyo (Haneda)"
                         }
                     },
                     {
-                        "iataCode": "NRT",
+                        "code": "NRT",
                         "name": {
-                            "japanese": "東京(成田)",
-                            "english": "Tokyo (Narita)"
+                            "ja": "東京(成田)",
+                            "en": "Tokyo (Narita)"
                         }
                     },
                     {
-                        "iataCode": "NGO",
+                        "code": "NGO",
                         "name": {
-                            "japanese": "名古屋(中部)",
-                            "english": "Nagoya (Chubu)"
+                            "ja": "名古屋(中部)",
+                            "en": "Nagoya (Chubu)"
                         }
                     },
                     {
-                        "iataCode": "*os",
+                        "code": "*os",
                         "name": {
-                            "japanese": "大阪(すべて)",
-                            "english": "Osaka (All)"
+                            "ja": "大阪(すべて)",
+                            "en": "Osaka (All)"
                         }
                     },
                     {
-                        "iataCode": "ITM",
+                        "code": "ITM",
                         "name": {
-                            "japanese": "大阪(伊丹)",
-                            "english": "Osaka (Itami)"
+                            "ja": "大阪(伊丹)",
+                            "en": "Osaka (Itami)"
                         }
                     },
                     {
-                        "iataCode": "KIX",
+                        "code": "KIX",
                         "name": {
-                            "japanese": "大阪(関西)",
-                            "english": "Osaka (Kansai)"
+                            "ja": "大阪(関西)",
+                            "en": "Osaka (Kansai)"
                         }
                     },
                     {
-                        "iataCode": "UKB",
+                        "code": "UKB",
                         "name": {
-                            "japanese": "大阪(神戸)",
-                            "english": "Osaka (Kobe)"
+                            "ja": "大阪(神戸)",
+                            "en": "Osaka (Kobe)"
                         }
                     },
                     {
-                        "iataCode": "HIJ",
+                        "code": "HIJ",
                         "name": {
-                            "japanese": "広島",
-                            "english": "Hiroshima"
+                            "ja": "広島",
+                            "en": "Hiroshima"
                         }
                     },
                     {
-                        "iataCode": "TAK",
+                        "code": "TAK",
                         "name": {
-                            "japanese": "高松",
-                            "english": "Takamatsu"
+                            "ja": "高松",
+                            "en": "Takamatsu"
                         }
                     },
                     {
-                        "iataCode": "FUK",
+                        "code": "FUK",
                         "name": {
-                            "japanese": "福岡",
-                            "english": "Fukuoka"
+                            "ja": "福岡",
+                            "en": "Fukuoka"
                         }
                     },
                     {
-                        "iataCode": "KKJ",
+                        "code": "KKJ",
                         "name": {
-                            "japanese": "北九州",
-                            "english": "Kitakyushu"
+                            "ja": "北九州",
+                            "en": "Kitakyushu"
                         }
                     },
                     {
-                        "iataCode": "NGS",
+                        "code": "NGS",
                         "name": {
-                            "japanese": "長崎",
-                            "english": "Nagasaki"
+                            "ja": "長崎",
+                            "en": "Nagasaki"
                         }
                     },
                     {
-                        "iataCode": "KOJ",
+                        "code": "KOJ",
                         "name": {
-                            "japanese": "鹿児島",
-                            "english": "Kagoshima"
+                            "ja": "鹿児島",
+                            "en": "Kagoshima"
                         }
                     },
                     {
-                        "iataCode": "OKA",
+                        "code": "OKA",
                         "name": {
-                            "japanese": "沖縄(那覇)",
-                            "english": "Okinawa (Naha)"
+                            "ja": "沖縄(那覇)",
+                            "en": "Okinawa (Naha)"
                         }
                     }
                 ]
             }
 
-## IATAコードで検索する [/airports/{iataCode}]
+## 3レターコードで検索する [/airports/{code}]
 
 ### 検索 [GET]
 
-IATAコードを使って国内の空港情報を取得します。
-IATAコードを使わずに呼び出すと、日本国内の空港情報を全件取得できます。
+3レターコードを使って国内の空港情報を取得します。
+3レターコードを使わずに呼び出すと、日本国内の空港情報を全件取得できます。
 
 + Parameters
 
-    + iataCode : `HND` (string) - IATA空港コード
+    + code : `HND` (string) - 空港コード(3レター)
 
 + Response 200 (application/json)
 
@@ -155,10 +155,10 @@ IATAコードを使わずに呼び出すと、日本国内の空港情報を全�
             {
                 "airport": [
                     {
-                        "iataCode": "HND",
+                        "code": "HND",
                         "name": {
-                            "japanese": "東京(羽田)",
-                            "english": "Tokyo (Haneda)"
+                            "ja": "東京(羽田)",
+                            "en": "Tokyo (Haneda)"
                         }
                     }
                 ]
@@ -170,6 +170,6 @@ IATAコードを使わずに呼び出すと、日本国内の空港情報を全�
 + airport: ``(array[Tairport]) - 検索結果
 
 ### Tairport
-+ iataCode: `HND` (string) - IATAコード
-+ Japanese: `東京(羽田)` (string) - 空港名称（日本語）
-+ English: `Tokyo (Haneda)` (string) - 空港名称（英語）
++ code: `HND` (string) - 3レターコード
++ ja: `東京(羽田)` (string) - 空港名称（日本語）
++ en: `Tokyo (Haneda)` (string) - 空港名称（英語）
