@@ -137,32 +137,66 @@ HOST: https://129.150.81.75
 
 ## 3レターコードで検索する [/domestic/{code}]
 
++ Parameters
+
+    + code  (string, required) - 空港コード(3レター)
+
 ### 検索 [GET]
 
 3レターコードを使って国内の空港情報を取得します。
-3レターコードを使わずに呼び出すと、日本国内の空港情報を全件取得できます。
 
-+ Parameters
++ Request KIX
 
-    + code : `HND` (string, required) - 空港コード(3レター、羽田)
+    + Parameters
+
+        + code : KIX
 
 + Response 200 (application/json)
 
-    + Attributes(Tairports)
-
-    + Body
-
-            {
-                "airport": [
-                    {
-                        "code": "HND",
-                        "name": {
-                            "ja": "東京(羽田)",
-                            "en": "Tokyo (Haneda)"
-                        }
+        {
+            "airport": [
+                {
+                    "code": "KIX",
+                    "name": {
+                        "ja": "大阪(関西)",
+                        "en": "Osaka (Kansai)"
                     }
-                ]
-            }
+                }
+            ]
+        }
+
++ Request HND
+
+    + Parameters
+
+        + code : HND
+
++ Response 200 (application/json)
+
+        {
+            "airport": [
+                {
+                    "code": "HND",
+                    "name": {
+                        "ja": "東京(羽田)",
+                        "en": "Tokyo (Haneda)"
+                    }
+                }
+            ]
+        }
+
++ Response 401 (application/json)
+
+        {
+            "error": "Authentication is required."
+        }
+
++ Response 404 (application/json)
+
+        {
+            "airport": []
+        }
+
 
 ## Data Structures
 
