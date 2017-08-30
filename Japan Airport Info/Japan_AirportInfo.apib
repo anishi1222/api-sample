@@ -144,7 +144,7 @@ HOST: https://129.150.81.75
 
 + Parameters
 
-    + code : `HND` (string) - 空港コード(3レター)
+    + code : `HND` (string, required) - 空港コード(3レター、羽田)
 
 + Response 200 (application/json)
 
@@ -163,13 +163,13 @@ HOST: https://129.150.81.75
                     }
                 ]
             }
-        
+
 ## Data Structures
 
 ### Tairports
-+ airport: ``(array[Tairport]) - 検索結果
++ airport:  (array[Tairport]) - 検索結果
 
 ### Tairport
-+ code: `HND` (string) - 3レターコード
-+ ja: `東京(羽田)` (string) - 空港名称（日本語）
-+ en: `Tokyo (Haneda)` (string) - 空港名称（英語）
++ code : HND (string) - 3レターコード
++ ja : `東京(羽田)` (string) - 空港名称（日本語）
++ en : `Tokyo (Haneda)` (string) - 空港名称（英語）
