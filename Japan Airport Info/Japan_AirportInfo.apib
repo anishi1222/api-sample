@@ -1,10 +1,49 @@
 FORMAT: 1A
 HOST: https://129.150.75.163
 
-# 空港情報（国内）
+# 空港情報
 
 3レターコードを使って空港情報を検索します。
-コード指定しない場合、国内の空港情報を全件取得できます。
+コード指定しない場合、関係する空港情報を全件取得できます。
+
+## 海外の空港情報を取得する [/international]
+
+### 全件取得 [GET]
+
+日本国外の空港情報を全件取得します。
+
++ Response 200 (application/json)
+
+    + Attributes(Tairports)
+
+    + Body
+
+            {
+                "airport": [
+                    {
+                        "code": "SFO",
+                        "name": {
+                            "ja": "サンフランシスコ",
+                            "en": "San Francisco"
+                        }
+                    },
+                    {
+                        "code": "LAX",
+                        "name": {
+                            "ja": "ロサンゼルス",
+                            "en": "Los Angeles"
+                        }
+                    },
+                    {
+                        "code": "SJC",
+                        "name": {
+                            "ja": "サンノゼ",
+                            "en": "San Jose"
+                        }
+                    }
+                ]
+            }
+
 
 ## 国内の空港情報を取得する [/domestic]
 
