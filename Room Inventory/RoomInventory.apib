@@ -7,7 +7,8 @@ HOST: http://private-d9210-roominventory.apiary-mock.com/
 
 利用にあたっては、API Keyが必要です。
 
-## ホテルを探す [/hotels{?country,pref,city,region,name,in,out,adult,child,roomCnt,min,max}]
+//## ホテルを探す [/hotels{?country,pref,city,region,name,in,out,adult,child,roomCnt,min,max}]
+## ホテルを探す [/hotels]
 
 ### 検索 [GET]
 
@@ -40,13 +41,18 @@ HOST: http://private-d9210-roominventory.apiary-mock.com/
 
     + Attributes(TError)
 
-## 宿泊を予約する [/hotels/reservation{?bookingId}]
+//## 宿泊を予約する [/hotels/reservation{?bookingId}]
+## 宿泊を予約する [/hotels/reservation]
 
 ### 予約 [POST]
 
 ホテルの部屋を予約します。
 ホテルID、部屋の種類、人数、チェックイン、チェックアウト日が必須です。
 予約が完了すると、レスポンスとして予約IDが戻ります。
+
++ Parameters
+
+    + bookingId : `booking-1234` (string, required) - 予約ID
 
 + Request (application/json)
 
