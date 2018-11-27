@@ -1,0 +1,156 @@
+FORMAT: 1A
+HOST: http://private-d9210-roominventory.apiary-mock.com/
+
+# ホテル検索・予約
+
+都市名や地域、宿泊日時などをもとに、ホテルの検索・予約するためのAPIです。
+
+利用にあたっては、API Keyが必要です。
+
+## ホテルを探す [/hotels{?country,pref,city,region,name,in,out,adult,child,roomCnt,min,max}]
+
+### 検索 [GET]
+
+国、地域、都道府県などで検索します。
+空室がない部屋仕様やホテルは検索結果に現れません。
+
++ Parameters
+
+    + country : `JP` (string) - 国コード
+    + pref : `13` (string) - 都道府県コード
+    + city : `13103` (string) - 市区町村コード
+    + region : `Aoyama` (string) - 地域キーワード
+    + name : `オラクルホテル青山` (string) - ホテル名
+    + in : `2017-02-10` (string) - チェックイン日
+    + out : `2017-02-13` (string) - チェックアウト日
+    + min : 10000 (number) - 金額の下限
+    + max : 50000 (number) - 金額の上限
+
++ Request (application/json)
+
+    + Headers
+
+            api-key : 6d1a4960-29a4-43d2-9ae5-670ed0b0b57f
+
++ Response 200 (application/json)
+
+    + Attributes(TSearchResult)
+
++ Response 404 (application/json)
+
+    + Attributes(TError)
+
+## 宿泊を予約する [/hotels/reservation{?bookingId}]
+
+### 予約 [POST]
+
+ホテルの部屋を予約します。
+ホテルID、部屋の種類、人数、チェックイン、チェックアウト日が必須です。
+予約が完了すると、レスポンスとして予約IDが戻ります。
+
++ Request (application/json)
+
+    + Headers
+
+            api-key : 6d1a4960-29a4-43d2-9ae5-670ed0b0b57f
+
+    + Attributes(TBookRequest)
+
++ Response 201 (application/json)
+
+    + Attributes(TBookResponse)
+
++ Response 403 (application/json)
+
+    + Attributes
+    
+        + code: E002 (string) - エラーコード
+        + info: ○●の理由で予約できませんでした (string) - エラーの詳細
+
++ Response 404 (application/json)
+
+    + Attributes
+    
+        + code: E001 (string) - エラーコード
+        + info: 予約可能な部屋がありません (string) - エラーの詳細
+
+### 予約内容の確認 [GET]
+
+予約IDを使って検索できます。
+予約IDを指定せずに検索することはできません。
+
++ Parameters
+
+    + bookingId : `booking-1234` (string, required) - 予約ID
+
++ Response 200 (application/json)
+
+    + Attributes(TBookInfo)
+
+## Data Structures
+
+### TSearchResult
++ result: (array[THotel]) - 検索結果
+
+### THotel
++ hotelId: `H0001` (string) - ホテルID
++ name: `オラクルホテル青山` (string) - ホテル名称
++ url: `http://www.oracle.com/jp` (string) - ホテルのURL
++ country : `JP` (string) - 国コード
++ pref : `13` (string) - 都道府県コード（海外の場合は99）
++ city : `13013` (string) - 市区町村コード（海外の場合は99999）
++ region : `青山` (string) - 地域キーワード
++ address: `東京都港区青山2-5-8` (string) - ホテルの所在地
++ comment: `新しい、清潔なホテルです。` (string) - ホテルのアピールコメント
++ in: `15:00` (string) - チェックイン開始時刻
++ out: `12:00` (string) - チェックアウト時刻
++ rooms: (array[TRoom]) - 利用可能な部屋
+
+### TRoom
++ roomId: `F001` (string) - ルームID
++ name: `ファミリー` (string) - 部屋名、仕様名
++ smokable : false (boolean) - 喫煙可、不可
++ fee: 12000 (number) - 宿泊代金
++ unit:  `JPY` (string) - 通貨単位
++ info: `ツインベッド、40m2のお部屋です。` (string) - 部屋を説明する情報
+
+### TError
++ code: `E001` (string) - エラーコード
++ info: `エラーメッセージ` (string) - エラーの詳細
+
+### TBookRequest
++ hotelId: `H0001` (string, required) - ホテルID
++ inDateTime: `2015-08-27T21:33:20Z` (string, required) - チェックイン日時
++ outDatetime: `2015-08-27T21:33:20Z` (string, required) - チェックアウト日時
++ roomId: `F001` (string, required) - ルームID
++ NumOfAdult: 1 (number) - 大人の宿泊人数
++ NumOChild: 0 (number) - 子供の宿泊人数
++ guestInfo: (TGuest) - 宿泊者の情報
++ tx_id: `94879` (string) - 取引トランザクションID
+
+### TGuest
++ lastName: `青山` (string) - 姓
++ firstName: `太郎` (string) - 名
++ countryId: `81` (string) - 国番号
++ phone: `8012345678` (string) - 電話番号
++ mail: `taro.aoyama@oracle.com` (string) 確認用メールアドレス
++ creditCard: (TCreditCard) - クレジットカード情報
+
+### TCreditCard
++ cardNum: `123456789012` (string) - クレジットカード番号
++ cardHolder: `TARO AOYAMA` (string) - クレジットカード所有者
++ securityCode: `94879` (string) - セキュリティコード
+
+### TBookResponse
++ bookingId: `B0001` (string) - 予約ID
++ tx_id: `94879` (string) - 取引トランザクションID（折り返し）
+
+### TBookInfo
++ bookingId: `B0001` (string) - 予約ID
++ hotelId: `H0001` (string, required) - ホテルID
++ inDateTime: `2015-08-27T21:33:20Z` (string, required) - チェックイン日時
++ outDatetime: `2015-08-27T21:33:20Z` (string, required) - チェックアウト日時
++ roomId: `F001` (string, required) - ルームID
++ NumOfAdult: 1 (number) - 大人の宿泊人数
++ NumOChild: 0 (number) - 子供の宿泊人数
++ guestInfo: (TGuest) - 宿泊者の情報
